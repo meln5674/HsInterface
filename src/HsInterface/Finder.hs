@@ -64,6 +64,7 @@ parseExport :: String -> Export
 parseExport (' ':' ':s) = case findInBrackets s of
     Nothing -> SingleExport s
     Just (pre,post) -> MultiExport pre (words post)
+parseExport x = error $ "Bad export line: " ++ show x
 
 showIfaceCommand :: String -> IO String
 showIfaceCommand p = readProcess "stack" ["ghc", "--", "--show-iface", p] ""
